@@ -1,7 +1,7 @@
 gem 'minitest', '~>5.0'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative 'night_writer'
+require './lib/night_writer'
 
 class FileReaderTest < Minitest::Test
 
@@ -11,6 +11,9 @@ class FileReaderTest < Minitest::Test
     file_name = ARGV[0]
 
     assert_equal message.txt, file_name
-
   end
+
+
+
+
 end
