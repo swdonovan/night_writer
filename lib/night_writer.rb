@@ -7,33 +7,47 @@ class NightWriter
               :reader,
               :translated_input
 
-attr_accessor :braille_hash_top
-
   def initialize
     @reader = FileReader.new
+    @braille_hash_top = Array.new
+    @braille_hash_middle = Array.new
+    @braille_hash_bottom = Array.new
   end
 
   def translate
     @translated_input = @reader.incoming_text
-    # @translated_input.braille_hash_top
-    braille_hash = {"abijklruvz" => "0.",
-                    "cdfgmnpqxy" => "00",
-                    "ehostw"=>".0"}
-    @translated_input.split("").map do |x|
-      if braille_hash.keys[0].include? x
-        braille_hash.values[0]
-      elsif braille_hash.keys[1].include? x
-        braille_hash.values[1]
-      elsif braille_hash.keys[2].include? x
-        braille_hash.values[2]
-      else
-        x
+    braille_hash = {"top_line" => {"abijklruvz" => "0.", "cdfgmnpqxy" => "00", "ehostw"=>".0"},
+                    "middle_line" => {"bfilpsv" => "0.", "ghjqrtw" => "00", "denoyz" => ".0", "ackmux" => ".."},
+                    "bottom_line" => {"klmnopqrst" => "0.", "uvxyz" => "00", "abcdefghij" => "..", "w" => ".0"}}
+    @translated_input.split("").each do |x|
+      if braille_hash["top_line"].keys[0].include? x
+        @braille_hash_top.push(braille_hash["top_line"].values[0])
+      elsif braille_hash["top_line"].keys[1].include? x
+        @braille_hash_top.push(braille_hash["top_line"].values[1])
+      elsif braille_hash["top_line"].keys[2].include? x
+        @braille_hash_top.push(braille_hash["top_line"].values[2])
+        end
       end
-    end
-  end
-
-  def braille_hash_top
-
+    @translated_input.split("").each do |x|
+      if braille_hash["middle_line"].keys[0].include? x
+        @braille_hash_middle.push(braille_hash["middle_line"].values[0])
+      elsif braille_hash["middle_line"].keys[1].include? x
+        @braille_hash_middle.push(braille_hash["middle_line"].values[1])
+      elsif braille_hash["middle_line"].keys[2].include? x
+        @braille_hash_middle.push(braille_hash["middle_line"].values[2])
+        end
+      end
+    @translated_input.split("").each do |x|
+      if braille_hash["bottom_line"].keys[0].include? x
+        @braille_hash_bottom.push(braille_hash["bottom_line"].values[0])
+      elsif braille_hash["bottom_line"].keys[1].include? x
+        @braille_hash_bottom.push(braille_hash["bottom_line"].values[1])
+      elsif braille_hash["bottom_line"].keys[2].include? x
+        @braille_hash_bottom.push(braille_hash["bottom_line"].values[2])
+      elsif braille_hash["bottom_line"].keys[3].include? x
+        @braille_hash_bottom.push(braille_hash["bottom_line"].values[3])
+        end
+      end
   end
 end
   # def writer
