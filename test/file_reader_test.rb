@@ -26,12 +26,15 @@ class FileReaderTest < Minitest::Test
 class NightWriterTest < Minitest::Test
   def test_NightWriter_initializes_FileReader
     skip
+    binding.pry
     words = FileReader.new
 
     assert_equal words.reader, @reader
   end
 end
 
-
-
+ def test_if_file_contents_can_be_split
+   @translated_input.split("")
+   assert_equal
+ end
 end
