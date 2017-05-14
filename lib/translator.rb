@@ -20,11 +20,18 @@ class Translator
         @braille_hash_top.push(braille_hash["top_line"].values[1])
       elsif braille_hash["top_line"].keys[2].include? x
         @braille_hash_top.push(braille_hash["top_line"].values[2])
-      elsif x != " " && x.downcase == x.upcase
-        @braille_hash_top.push(".." + braille_hash["top_line"].values[2])
-        binding.pry
+      elsif x == " "
+        @braille_hash_top.push("..")
+      elsif x != " " && x == x.upcase
+        if braille_hash["top_line"].keys[0].include? x.downcase
+          @braille_hash_top.push(".." + braille_hash["top_line"].values[0])
+        elsif braille_hash["top_line"].keys[1].include? x.downcase
+          @braille_hash_top.push(".." + braille_hash["top_line"].values[1])
+        elsif braille_hash["top_line"].keys[2].include? x.downcase
+          @braille_hash_top.push(".." + braille_hash["top_line"].values[2])
         end
       end
+    end
     @translated_input.split("").each do |x|
       if braille_hash["middle_line"].keys[0].include? x
         @braille_hash_middle.push(braille_hash["middle_line"].values[0])
@@ -32,10 +39,22 @@ class Translator
         @braille_hash_middle.push(braille_hash["middle_line"].values[1])
       elsif braille_hash["middle_line"].keys[2].include? x
         @braille_hash_middle.push(braille_hash["middle_line"].values[2])
-      elsif x == x.upcase
-        @braille_hash_middle.push(".." + braille_hash["middle_line"].values[2])
+      elsif braille_hash["middle_line"].keys[3].include? x
+        @braille_hash_middle.push(braille_hash["middle_line"].values[3])
+      elsif x == " "
+        @braille_hash_middle.push("..")
+      elsif x != " " && x == x.upcase
+        if braille_hash["middle_line"].keys[0].include? x.downcase
+          @braille_hash_middle.push(".." + braille_hash["middle_line"].values[0])
+        elsif braille_hash["middle_line"].keys[1].include? x.downcase
+          @braille_hash_middle.push(".." + braille_hash["middle_line"].values[1])
+        elsif braille_hash["middle_line"].keys[2].include? x.downcase
+          @braille_hash_middle.push(".." + braille_hash["middle_line"].values[2])
+        elsif braille_hash["middle_line"].keys[3].include? x.downcase
+          @braille_hash_middle.push(".." + braille_hash["middle_line"].values[3])
         end
       end
+    end
     @translated_input.split("").each do |x|
       # binding.pry
       if braille_hash["bottom_line"].keys[0].include? x
@@ -46,14 +65,50 @@ class Translator
         @braille_hash_bottom.push(braille_hash["bottom_line"].values[2])
       elsif braille_hash["bottom_line"].keys[3].include? x
         @braille_hash_bottom.push(braille_hash["bottom_line"].values[3])
-      elsif x == x.upcase
-        @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[2])
+      elsif x == " "
+        @braille_hash_bottom.push("..")
+      elsif x != " " && x == x.upcase
+        if braille_hash["bottom_line"].keys[0].include? x.downcase
+          @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[0])
+        elsif braille_hash["bottom_line"].keys[1].include? x.downcase
+          @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[1])
+        elsif braille_hash["bottom_line"].keys[2].include? x.downcase
+          @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[2])
+        elsif braille_hash["bottom_line"].keys[3].include? x.downcase
+          @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[3])
         end
       end
-
+    end
+    if @braille_hash_top.join.length <= 160
       @final_braille_on_rails = @braille_hash_top.join + "\n" + @braille_hash_middle.join + "\n" + @braille_hash_bottom.join
       print @final_braille_on_rails
+    else
+      chunk_one = []
+      chunk_four = []
+      if @braille_hash_top.join.length != nil && chunk_one.join.length != 160
+        chunk_one << @braille_hash_top.shift
+      else
+        chunk_four << @braille_hash_top.shift
+        # binding.pry
+      end
+      chunk_two = []
+      chunk_five = []
+      if @braille_hash_middle.join.length != nil || chunk_two.join.length <= 160
+        chunk_two << @braille_hash_middle.shift
+      else
+        chunk_five
+      end
+      chunk_three = []
+      until @braille_hash_bottom.join.length != nil || chunk_three.join.length <= 160
+        chunk_three << @braille_hash_bottom.shift
+      end
+      binding.pry
+       print chunk_one.join + "\n" + chunk_two.join + "\n" + chunk_three.join
+       #for characters with array bettween 160-320 shovel into next chunks
+    end
   end
 end
 
 # @translator = Translator.new
+# @final_braille_on_rails << (@braille_hash_top.join[0..160] + "\n" + @braille_hash_middle.join[0..160] + "\n" + @braille_hash_bottom.join[0..160])
+#@final_braille_on_rails << (@braille_hash_top.join[0..-1] + "\n" + @braille_hash_middle.join[0..-1] + "\n" + @braille_hash_bottom.join[0..-1])
