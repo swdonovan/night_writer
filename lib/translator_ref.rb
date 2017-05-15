@@ -27,11 +27,11 @@ class Translator
       elsif x == " "
         @braille_hash_top.push("..")
       elsif x != " " && x == x.upcase
-        @upcase_to_top_line(x)
+        @upcase_to_top_line
       end
     end
   end
-  def upcase_to_top_line(x)
+  def upcase_to_top_line
     if braille_hash["top_line"].keys[0].include? x.downcase
       @braille_hash_top.push(".." + braille_hash["top_line"].values[0])
     elsif braille_hash["top_line"].keys[1].include? x.downcase
@@ -53,11 +53,11 @@ class Translator
       elsif x == " "
         @braille_hash_middle.push("..")
       elsif x != " " && x == x.upcase
-        @upcase_to_middle_line(x)
+        @upcase_to_middle_line
       end
     end
   end
-  def upcase_to_middle_line(x)
+  def upcase_to_middle_line
     if braille_hash["middle_line"].keys[0].include? x.downcase
       @braille_hash_middle.push(".." + braille_hash["middle_line"].values[0])
     elsif braille_hash["middle_line"].keys[1].include? x.downcase
@@ -82,12 +82,12 @@ class Translator
       elsif x == " "
         @braille_hash_bottom.push("..")
       elsif x != " " && x == x.upcase
-        @upcase_to_bottom_line(x)
+        @upcase_to_bottom_line
       end
     end
   end
 
-  def upcase_to_bottom_line(x)
+  def upcase_to_bottom_line
     if braille_hash["bottom_line"].keys[0].include? x.downcase
       @braille_hash_bottom.push(".0" + braille_hash["bottom_line"].values[0])
     elsif braille_hash["bottom_line"].keys[1].include? x.downcase
