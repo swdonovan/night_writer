@@ -1,4 +1,7 @@
 class Translator
+  attr_accessor :top_line_translate_to_braille,
+                :middle_line_translate_to_braille,
+                :bottom_line_translate_to_braille
 
   def initialize(input)
     @translated_input = input
@@ -14,6 +17,9 @@ class Translator
 
   def translator
   @translated_input_array = @translated_input.split("")
+  @translated_input_array.top_line_translate_to_braille
+  @translated_input_array.middle_line_translate_to_braille
+  @translated_input_array.bottom_line_translate_to_braille
   end
 
   def top_line_translate_to_braille
