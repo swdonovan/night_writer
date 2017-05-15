@@ -3,6 +3,8 @@ class Translator
                 :middle_line_translate_to_braille,
                 :bottom_line_translate_to_braille
 
+  attr_reader :translated_input_array
+
   def initialize(input)
     @translated_input = input
     @braille_hash = {"top_line" => {"abehkloruvz" => "0.", "cdfgmnpqxy" => "00", "ijstw"=>".0"},
