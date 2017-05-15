@@ -26,6 +26,6 @@ end
   # # end
 # puts "Created '#{ARGV[1]}' containing #{@reader.size} characters."
 
-
-testing = NightWriter.new
-puts testing.translate.inspect
+#
+# testing = NightWriter.new
+# puts testing.translate.inspect
