@@ -102,7 +102,7 @@ class Translator
       until @braille_hash_bottom.join.length != nil || chunk_three.join.length <= 160
         chunk_three << @braille_hash_bottom.shift
       end
-      binding.pry
+      # binding.pry
        print chunk_one.join + "\n" + chunk_two.join + "\n" + chunk_three.join
        #for characters with array bettween 160-320 shovel into next chunks
     end
