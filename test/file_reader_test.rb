@@ -17,24 +17,10 @@ class FileReaderTest < Minitest::Test
   end
 
   def test_if_incoming_text_is_captured
+    skip
     name = File.open(ARGV[0], "r")
     incoming_text = name.read
 
     assert_equal "Hello everyone. Test test\n", incoming_text
   end
-
-class NightWriterTest < Minitest::Test
-  def test_NightWriter_initializes_FileReader
-    skip
-    binding.pry
-    words = FileReader.new
-
-    assert_equal words.reader, @reader
-  end
-end
-
- def test_if_file_contents_can_be_split
-   @translated_input.split("")
-   assert_equal
- end
 end
