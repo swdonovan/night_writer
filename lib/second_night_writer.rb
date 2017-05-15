@@ -1,6 +1,6 @@
 require 'pry'
 require_relative 'file_reader'
-require_relative 'translator.rb'
+require_relative 'translator_ref'
 
 class NightWriter
   attr_reader :incoming_text,
@@ -15,8 +15,8 @@ class NightWriter
 
   def translate
     @translated_input = @reader.incoming_text
-    @translator = Translator.new(@translated_input)
-    @translated_input = @translator.translator
+    @final_input = Translator.new(@translated_input)
+    @translated_input = @final_input.translator
   end
 end
   # def writer
