@@ -1,7 +1,7 @@
 gem 'minitest', '~>5.0'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/second_night_writer'
+require './lib/night_write'
 require 'pry'
 
 class NightWriterTest < Minitest::Test
@@ -13,25 +13,21 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_NightWriter_reads_other_file_content
-    skip
-    file_name = File.open(lib/test.txt, "r")
-    body = file_name.read
-    file_name.close
+    file_name = File.read(ARGV[0])
     text = NightWriter.new
 
-    assert_equal body, text.reader.incoming_text
+    assert_equal file_name.chomp, text.reader.incoming_text
   end
 
  def test_if_file_contents_can_be_split
-   text = NightWriter.new
-   translating = text.translate
-   input = "testing"
+   night_writer = NightWriter.new
+   expected_output = "testing".split("")
 
-   assert_equal input.split(""), translating
+   assert_equal(expected_output, night_writer.translate)
  end
 
- def test_if_text_translates_to_braille
-   text = NightWriter.new
-
- end
+ # def test_if_text_translates_to_braille
+ #   text = NightWriter.new
+ #   text.translate
+ # end
 end

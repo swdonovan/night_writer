@@ -18,23 +18,21 @@ class Translator
 
 
   def translator
-  @translated_input_array = @translated_input.split("")
-  @top_line_translate_to_braille
-  @middle_line_translate_to_braille
-  @bottom_line_translate_to_braille
+    translated_input_characters = @translated_input.split("")
+    top_line_translate_to_braille(translated_input_characters)
   end
 
-  def top_line_translate_to_braille
-    @translated_input_array.each do |x|
-      if braille_hash["top_line"].keys[0].include? x
-        @braille_hash_top.push(braille_hash["top_line"].values[0])
-      elsif braille_hash["top_line"].keys[1].include? x
-        @braille_hash_top.push(braille_hash["top_line"].values[1])
-      elsif braille_hash["top_line"].keys[2].include? x
-        @braille_hash_top.push(braille_hash["top_line"].values[2])
-      elsif x == " "
+  def top_line_translate_to_braille(translated_input_characters)
+    translated_input_characters.each do |char|
+      if @braille_hash["top_line"].keys[0].include? char
+        @braille_hash_top.push(@braille_hash["top_line"].values[0])
+      elsif @braille_hash["top_line"].keys[1].include? char
+        @braille_hash_top.push(@braille_hash["top_line"].values[1])
+      elsif @braille_hash["top_line"].keys[2].include? char
+        @braille_hash_top.push(@braille_hash["top_line"].values[2])
+      elsif char == " "
         @braille_hash_top.push("..")
-      elsif x != " " && x == x.upcase
+      elsif char != " " && char == char.upcase
         @upcase_to_top_line
       end
     end
