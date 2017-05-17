@@ -1,8 +1,8 @@
 require 'pry'
 require_relative 'file_reader'
-require_relative 'translator_ref'
+require_relative 'translator'
 
-class NightWriter
+class NightWrite
   attr_reader :incoming_text,
               :file_name,
               :reader,
@@ -15,7 +15,9 @@ class NightWriter
   # binding.pry
 
   def translate
-    @final_input = Translator.new(@reader.incoming_text).translator
+    @final_input = Translator.new.translator(@reader.incoming_text)
+    # translator = Translator.new
+    # @final_input = translator.translator(@reader.incoming_text)
   end
 end
   # def writer
@@ -26,5 +28,5 @@ end
 # puts "Created '#{ARGV[1]}' containing #{@reader.size} characters."
 
 #
-testing = NightWriter.new
-puts testing.translate.inspect
+testing = NightWrite.new
+puts testing.translate

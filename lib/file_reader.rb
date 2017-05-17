@@ -8,9 +8,18 @@ class FileReader
     @incoming_text = @file_name.read.chomp
     @file_name.close
   end
+
+  # def self.read(filename)
+  #   file = File.open(filename, "r")
+  #   data = file.read
+  #   file.close
+  #   return data
+  # end
+
 end
 
 #
 # words = FileReader.new
 #
 # puts words.incoming_text
+#Name File io and bring write method in
