@@ -9,6 +9,13 @@ class FileReader
     @file_name.close
   end
 
+  # def writer(final_input)
+  #   writer = File.open(ARGV[1], "w+")
+  #   writer.write(@final_input)
+  #   writer.close
+  # end
+end
+
   # def self.read(filename)
   #   file = File.open(filename, "r")
   #   data = file.read
@@ -16,7 +23,6 @@ class FileReader
   #   return data
   # end
 
-end
 
 #
 # words = FileReader.new

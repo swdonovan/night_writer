@@ -10,17 +10,16 @@ class FileReaderTest < Minitest::Test
   end
 
   def test_if_file_name_is_correct
-    skip
+    # binding.pry
     name = File.open(ARGV[0], "r")
 
-    assert_equal " #<File:lib/message.txt>", name
+    assert_equal "#<File:lib/message.txt>", name.inspect
   end
 
   def test_if_incoming_text_is_captured
-    skip
     name = File.open(ARGV[0], "r")
     incoming_text = name.read
 
-    assert_equal "Hello everyone. Test test\n", incoming_text
+    refute_nil incoming_text
   end
 end
